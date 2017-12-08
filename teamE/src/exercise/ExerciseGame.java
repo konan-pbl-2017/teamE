@@ -48,11 +48,15 @@ public class ExerciseGame extends SimpleShootingGame {
 		myShip = new Sprite("data\\images\\MyShip.gif");
 		universe.place(myShip);
 		
-		enemy=new Sprite("data\\images\\enemy.gif");
+		enemy = new Sprite("data\\images\\MyShip.gif"); 
+		enemy.setPosition(0.0, 10.0);
 		universe.place(enemy);
+		
 		setViewRange(30, 30);
 		myShip.setPosition(0.0, 0.0);
-		enemy.setPosition(0.0, 10.0);
+		Ground2D stage = new Ground2D(null, "data\\images\\m101.jpg",
+				windowSizeWidth, windowSizeHeight);
+		universe.place(stage);
 	}
 
 	@Override
@@ -63,19 +67,10 @@ public class ExerciseGame extends SimpleShootingGame {
 		if (virtualController.isKeyDown(0, RWTVirtualController.UP)) {
 			myShip.moveUp(5);
 		}
-		if (virtualController.isKeyDown(0, RWTVirtualController.LEFT)) {
-			myShip.moveLeft(5);
-		}
-		if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
-			myShip.moveDown(5);
-		}
-		
-		if(enemy.checkCollision(myShip)){
-			
-			myShip.moveDown(5);	
+		if (myShip.checkCollision(enemy)) {
+			System.out.println("“G‚É“–‚½‚Á‚½!");
 		}
 	}
-	
 
 	@Override
 	public RWTFrame3D createFrame3D() {
