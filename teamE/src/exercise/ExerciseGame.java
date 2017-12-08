@@ -12,6 +12,7 @@ import com.sun.j3d.utils.image.TextureLoader;
 
 import framework.RWT.RWTFrame3D;
 import framework.RWT.RWTVirtualController;
+import framework.game2D.Ground2D;
 import framework.game2D.Sprite;
 import framework.gameMain.SimpleGame;
 import framework.gameMain.SimpleShootingGame;
@@ -22,6 +23,9 @@ import framework.model3D.Universe;
 import framework.view3D.Camera3D;
 
 public class ExerciseGame extends SimpleShootingGame {
+	Sprite myShip;
+	private Sprite enemy;
+	
 	@Override
 	public void init(Universe universe) {
 		// 平行光源を配置する
@@ -40,16 +44,45 @@ public class ExerciseGame extends SimpleShootingGame {
         
 		// 背景を作成する
 		buildSkyBox(universe);
+		
+		myShip = new Sprite("data\\images\\MyShip.gif");
+		universe.place(myShip);
+		
+		enemy=new Sprite("data\\images\\enemy.gif");
+		universe.place(enemy);
+		setViewRange(30, 30);
+		myShip.setPosition(0.0, 0.0);
+		enemy.setPosition(0.0, 10.0);
 	}
 
 	@Override
 	public void progress(RWTVirtualController virtualController, long interval) {
+		if (virtualController.isKeyDown(0, RWTVirtualController.RIGHT)) {
+			myShip.moveRight(5);
+		}
+		if (virtualController.isKeyDown(0, RWTVirtualController.UP)) {
+			myShip.moveUp(5);
+		}
+		if (virtualController.isKeyDown(0, RWTVirtualController.LEFT)) {
+			myShip.moveLeft(5);
+		}
+		if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
+			myShip.moveDown(5);
+		}
 		
+		if(enemy.checkCollision(myShip)){
+			
+			myShip.moveDown(5);	
+		}
 	}
+	
 
 	@Override
 	public RWTFrame3D createFrame3D() {
-		return null;
+		RWTFrame3D f = new RWTFrame3D();
+		f.setSize(800, 600);
+		f.setTitle("サンプルゲーム");
+		return f;
 	}
 	
 	/**
