@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  
 public class StartPanel extends JPanel {
 	
-    JButton btn,btn2,btn3;
+    JButton btn1,btn2,btn3;
     JLabel paneltitle;
     MainFrame mf;
     String str;
@@ -28,15 +28,23 @@ public class StartPanel extends JPanel {
         paneltitle.setBounds(0, 5, 400, 40);
         this.add(paneltitle);
         
-        btn = new JButton("ステージ選択に移動");
-        btn.setBounds(450, 400, 300, 80);
-        btn.addActionListener(new ActionListener(){
+        btn1 = new JButton("ステージ選択に移動");
+        btn1.setBounds(450, 400, 300, 80);
+        btn1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 pc(mf.PanelNames[1]);
             }
         });
-        this.add(btn);
+        this.add(btn1);
         
+        btn2 = new JButton("遊び方");
+        btn2.setBounds(450, 400, 300, 80);
+        btn2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                pc(mf.PanelNames[1]);
+            }
+        });
+        this.add(btn2);
     }
     
     public void pc(String str){

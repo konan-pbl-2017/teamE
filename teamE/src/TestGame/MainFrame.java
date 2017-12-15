@@ -6,15 +6,18 @@ import javax.swing.JPanel;
  
 public class MainFrame extends JFrame{
     
-    public String[] PanelNames = {"start","stsel","map1","map2","result"};
+    public String[] PanelNames = {"start","stsel","map1","map2","result","rule"};
     StartPanel start = new StartPanel(this,PanelNames[0]);
     StageSelect stsel = new StageSelect(this,PanelNames[1]);
     MapPanel map1 = new MapPanel(this,PanelNames[2]);
     MapPanel map2 = new MapPanel(this,PanelNames[3]);
     ResultPanel result = new ResultPanel(this,PanelNames[4]);
+    StartPanel rule = new StartPanel(this,PanelNames[5]);
+
      
     public MainFrame(){
         this.add(start);start.setVisible(true);//ゲーム起動時、最初のパネルだけを表示
+        this.add(rule);rule.setVisible(false);
         this.add(stsel);stsel.setVisible(false);
         this.add(map1);map1.setVisible(false);
         this.add(map2);map2.setVisible(false);
