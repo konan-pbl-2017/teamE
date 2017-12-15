@@ -2,6 +2,7 @@ package game.kawasaki;
 
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 
 import framework.RWT.RWTContainer;
@@ -28,6 +29,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	
 	private Sprite myBase;
 	private Sprite enemySpawn;
+	ArrayList<Sprite> enemyUnitList;
 		
 	// 速度によって物体が動いている時にボタンを押せるかどうかを判定するフラグ
 	private boolean disableControl = false;
@@ -46,29 +48,38 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		
 		// 自分の基地の配置
 		myBase = new Sprite("data\\RPG\\player.png");
-		myBase.setPosition(10.0, 10.0);
+		myBase.setPosition(30.0, 14.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
 		
 		//敵の発生場所
 		myBase = new Sprite("data\\RPG\\player.png");
-		myBase.setPosition(10.0, 10.0);
+		myBase.setPosition(0.0, 14.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
 		
+		//敵のユニット発生
+		enemyUnitList = new ArrayList<Sprite>();
+		//enemyUnitList = Sprite("data\\RPG\\monster.png");
+		
+		
+		
+		/*
 		// 王様の配置
 		king = new Sprite("data\\RPG\\king.png");
 		king.setPosition(18.0, 24.0);
 		king.setCollisionRadius(0.5);
 		universe.place(king);
-		
+		*/
 		
 		
 		// プレイヤーを画面の中央に
-		setCenter(player);
+		//setCenter(player);
 		
+		/*
 		// シナリオの設定
 		setScenario("data\\TemplateRPG\\Scenario\\scenario2.xml");
+		*/
 	}
 	
 	@Override
