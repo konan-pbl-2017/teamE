@@ -49,6 +49,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		
 		// プレイヤーを画面の中央に
 		setCenter(player);
+		setViewRange(30, 30);
 		
 		// シナリオの設定
 		setScenario("data\\TemplateRPG\\Scenario\\scenario2.xml");
