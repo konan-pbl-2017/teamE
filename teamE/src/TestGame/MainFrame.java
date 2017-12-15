@@ -19,7 +19,7 @@ public class MainFrame extends JFrame{
         this.add(map1);map1.setVisible(false);
         this.add(map2);map2.setVisible(false);
         this.add(result);result.setVisible(false);
-        this.setBounds(100, 100, 400, 200);
+        this.setBounds(100, 100, 1200, 600);//画面のサイズ変更
     }
     
     //メインメソッド
