@@ -22,14 +22,14 @@ public class StartPanel extends JPanel {
         str = s;
         this.setName("start");
         this.setLayout(null);
-        this.setSize(400, 200);
+        this.setSize(1200, 600);
         paneltitle = new JLabel("これは"
                 +getClass().getCanonicalName()+"クラスのパネルです");
         paneltitle.setBounds(0, 5, 400, 40);
         this.add(paneltitle);
         
         btn = new JButton("ステージ選択に移動");
-        btn.setBounds(20, 50, 150, 40);
+        btn.setBounds(450, 400, 300, 80);
         btn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 pc(mf.PanelNames[1]);
