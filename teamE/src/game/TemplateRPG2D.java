@@ -47,6 +47,8 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		king.setCollisionRadius(0.5);
 		universe.place(king);
 		
+		
+		
 		// ƒvƒŒƒCƒ„[‚ğ‰æ–Ê‚Ì’†‰›‚É
 		setCenter(player);
 		setViewRange(30, 30);
