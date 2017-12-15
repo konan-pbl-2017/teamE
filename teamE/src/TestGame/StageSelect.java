@@ -22,14 +22,14 @@ public class StageSelect extends JPanel {
         str = s;
         this.setName("stsel");
         this.setLayout(null);
-        this.setSize(400, 200);
+        this.setSize(1200, 600);
         paneltitle = new JLabel("これは"
                 +getClass().getCanonicalName()+"クラスのパネルです");
         paneltitle.setBounds(0, 5, 400, 40);
         this.add(paneltitle);
         
-        btn1 = new JButton("ステージlに移動");
-        btn1.setBounds(20, 50, 150, 40);
+        btn1 = new JButton("ステージ1に移動");
+        btn1.setBounds(150, 120, 300, 80);
         btn1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 pc(mf.PanelNames[2]);
@@ -38,7 +38,7 @@ public class StageSelect extends JPanel {
         this.add(btn1);
         
         btn2 = new JButton("ステージ2に移動");
-        btn2.setBounds(200, 50, 150, 40);
+        btn2.setBounds(750, 120, 300, 80);
         btn2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 pc(mf.PanelNames[3]);
@@ -48,7 +48,7 @@ public class StageSelect extends JPanel {
         
         
         btn3 = new JButton("戻る");
-        btn3.setBounds(20, 100, 150, 40);
+        btn3.setBounds(450, 400, 300, 80);
         btn3.addActionListener(new ActionListener(){
         	//処理したい内容を記述、ここではパネルチェンジ
             public void actionPerformed(ActionEvent e){
