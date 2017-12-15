@@ -22,6 +22,7 @@ import framework.RWT.RWTFrame3D;
 import framework.RWT.RWTVirtualController;
 import framework.RWT.RWTVirtualKey;
 import framework.game2D.Maze2D;
+import framework.game2D.Movable;
 import framework.game2D.Sprite;
 import framework.model3D.Position3D;
 import framework.model3D.Universe;
@@ -39,15 +40,15 @@ import framework.view3D.CameraMap;
 public abstract class SimpleMapGame extends SimpleMazeGame {
 	protected double mapCenterX = 0;
 	protected double mapCenterY = 0;
-	protected Sprite center = null;
+	protected Movable center = null;
 
 	public void update(RWTVirtualController virtualController, long interval) {
 		progress(virtualController, interval);
-		setMapCenter(center.getPosition().getX(), center.getPosition().getY());
+		if (center != null) setMapCenter(center.getPosition().getX(), center.getPosition().getY());
 		camera.adjust(interval);
 	}
 	
-	protected void setCenter(Sprite center) {
+	protected void setCenter(Movable center) {
 		this.center = center;
 		setMapCenter(center.getPosition().getX(), center.getPosition().getY());
 	}
