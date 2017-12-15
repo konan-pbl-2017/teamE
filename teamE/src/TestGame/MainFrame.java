@@ -12,7 +12,7 @@ public class MainFrame extends JFrame{
     MapPanel map1 = new MapPanel(this,PanelNames[2]);
     MapPanel map2 = new MapPanel(this,PanelNames[3]);
     ResultPanel result = new ResultPanel(this,PanelNames[4]);
-    StartPanel rule = new StartPanel(this,PanelNames[5]);
+    Rule rule = new Rule(this,PanelNames[5]);
 
      
     public MainFrame(){
@@ -52,6 +52,9 @@ public class MainFrame extends JFrame{
         }else if(name==PanelNames[4]){
             result = (ResultPanel)jp;
             result.setVisible(false);
+        }else if(name==PanelNames[5]){
+            rule = (Rule)jp;
+            rule.setVisible(false);
         }
         
         
@@ -65,6 +68,8 @@ public class MainFrame extends JFrame{
             map2.setVisible(true);
         }else if(str==PanelNames[4]){
             result.setVisible(true);
+        }else if(str==PanelNames[5]){
+            rule.setVisible(true);
         }
     }
 }

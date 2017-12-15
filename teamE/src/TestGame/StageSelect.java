@@ -29,7 +29,7 @@ public class StageSelect extends JPanel {
         this.add(paneltitle);
         
         btn1 = new JButton("ステージ1に移動");
-        btn1.setBounds(150, 120, 300, 80);
+        btn1.setBounds(150, 220, 300, 80);
         btn1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 pc(mf.PanelNames[2]);
@@ -38,7 +38,7 @@ public class StageSelect extends JPanel {
         this.add(btn1);
         
         btn2 = new JButton("ステージ2に移動");
-        btn2.setBounds(750, 120, 300, 80);
+        btn2.setBounds(750, 220, 300, 80);
         btn2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 pc(mf.PanelNames[3]);
