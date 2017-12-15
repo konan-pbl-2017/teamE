@@ -11,12 +11,14 @@ import framework.game2D.Velocity2D;
 public class MyBase extends Sprite {
 	//©•ª‚ÌHP
 	int myBaseHP = 10000;
+	public int myBaseMoney = 5000;
+	
 	// ’e‚ÌÀ•W
 	double bulletX, bulletY;
 	// ’e–‹‚ÌÅ‘å”
 	public final int MAX_DANMAKU = 32;
 	// ’e‚Ì”­Ë‚Ì©‹@‚©‚ç‚ÌˆÊ’u
-	private final int BULLET_DISTANCE = 1;
+	private final int BULLET_DISTANCE = 1; 
 	private MyShipBullet myShipBullet;
 
 	public MyBase(String string) {
@@ -41,10 +43,10 @@ public class MyBase extends Sprite {
 		for (int i = 0; i < MAX_DANMAKU; i++) {
 			myShipBullet = new MyShipBullet("data\\images\\myBullet.gif");
 
-			bulletX = BULLET_DISTANCE
-					* (Math.cos(i * (2 * Math.PI / MAX_DANMAKU)));
-			bulletY = BULLET_DISTANCE
-					* (Math.sin(i * (2 * Math.PI / MAX_DANMAKU)));
+			bulletX = BULLET_DISTANCE;
+					//* (Math.cos(i * (2 * Math.PI / MAX_DANMAKU)));
+			bulletY = BULLET_DISTANCE;
+					//* (Math.sin(i * (2 * Math.PI / MAX_DANMAKU)));
 
 			// ’e‚ÌˆÊ’u
 			myShipBullet.setPosition(this.getPosition());

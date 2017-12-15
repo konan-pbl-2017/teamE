@@ -75,6 +75,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		
 		// プレイヤーを画面の中央に
 		//setCenter(player);
+		//setCenter(player);
 		
 		/*
 		// シナリオの設定
