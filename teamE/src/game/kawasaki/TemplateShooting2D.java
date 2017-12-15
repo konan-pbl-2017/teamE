@@ -21,6 +21,7 @@ public class TemplateShooting2D extends SimpleShootingGame {
 	private ArrayList<EnemyUnit> enemyUnitList = new ArrayList<EnemyUnit>();
 	private ArrayList<EnemyUnit> enemyUnitFromSpawn = new ArrayList<EnemyUnit>();
 
+
 	private Ground2D stage;
 	//private MapStage stage;
 	
@@ -28,6 +29,7 @@ public class TemplateShooting2D extends SimpleShootingGame {
 	private long lastMyShipBulletShootDanamakuTime = 0;
 	private long lastEnemyShootTime = 0;
 
+	
 	// あとで設計変更
 	// Enemyクラスでこの値を使いたいため。
 	public static final int RANGE = 30;
@@ -62,7 +64,7 @@ public class TemplateShooting2D extends SimpleShootingGame {
 	public RWTFrame3D createFrame3D() {
 		// TODO Auto-generated method stub
 		RWTFrame3D f = new RWTFrame3D();
-		f.setSize(800, 800);
+		f.setSize(500, 800);
 		// f.setExtendedState(Frame.MAXIMIZED_BOTH);
 		f.setTitle("Template for Shooting 2DGame");
 		return f;
@@ -153,7 +155,7 @@ public class TemplateShooting2D extends SimpleShootingGame {
 			myBaseSprite.motion(interval);
 		}
 
-		// プレイヤーの弾を動かす
+		// プレイヤーの弾を動かす(ArrayListで管理している)
 		for (int i = 0; i < myShipBulletList.size(); i++) {
 			MyShipBullet myShipBullet = myShipBulletList.get(i);
 			myShipBullet.motion(interval);		// プレイヤーの弾の移動
@@ -161,11 +163,11 @@ public class TemplateShooting2D extends SimpleShootingGame {
 			if (myShipBullet.isInScreen(viewRangeWidth, viewRangeHeight) == false) {
 				// プレイヤーの弾を消す
 				universe.displace(myShipBullet);
-				myShipBulletList.remove(i);// .add()の逆、リストから排除
+				myShipBulletList.remove(i);// addメソッドの逆、
 			}
 		}
 
-		// 敵（スプライト）を動かす
+		// 敵（スプライト型のArrayList）を動かす
 		//enemySprite.motion(interval);
 
 		// 敵の弾を動かす。同時にウィンドウ外に出てしまったかどうかを判定し、出てしまったらウインドウから弾を消す。
