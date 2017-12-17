@@ -13,7 +13,7 @@ public class EnemySpawn extends Sprite {
 	private int enemyHP = 100;
 
 	// ’e–‹‚ÌÅ‘å”
-	private final int MAX_DANMAKU = 5;
+	private final int MAX_DANMAKU = 1;
 	
 	// ’e‚Ì”­Ë‚Ì“G‚©‚ç‚ÌˆÊ’u
 	private final int BULLET_DISTANCE = 1;
@@ -62,20 +62,20 @@ public class EnemySpawn extends Sprite {
 	 * 
 	 * @return -- ’e–‹‚ª“ü‚Á‚½ArrayList
 	 */
-	public ArrayList<EnemyUnit> shootDanmaku() {
+	public ArrayList<EnemyUnit> goEnemyUnits() {
 		double bulletX, bulletY;
 		
 		ArrayList<EnemyUnit> enemyBulletList = new ArrayList<EnemyUnit>();
 		for (int i = 0; i < MAX_DANMAKU; i++) {
-			EnemyUnit enemyBullet = new EnemyUnit("data\\images\\enemyBullet.gif");
+			EnemyUnit enemyBullet = new EnemyUnit("data\\images\\Enemy.gif");
 
 			//‚Ü‚Á‚·‚®i‚Ş“G
-			bulletX = BULLET_DISTANCE * 0.8;
-			bulletY = 0;
+			//bulletX = BULLET_DISTANCE * 0.8;
+			//bulletY = 0;
 			
 			//•úËó‚Éo‚é’e
-			//bulletX = BULLET_DISTANCE * (Math.cos(i * (2 * Math.PI / MAX_DANMAKU)));
-			//bulletY = BULLET_DISTANCE * (Math.sin(i * (2 * Math.PI / MAX_DANMAKU)));
+			bulletX = BULLET_DISTANCE * (Math.cos(i * (2 * Math.PI / MAX_DANMAKU)));
+			bulletY = BULLET_DISTANCE * (Math.sin(i * (2 * Math.PI / MAX_DANMAKU)));
 
 			// ’e‚ÌˆÊ’u‚ğİ’è
 			enemyBullet.setPosition(this.getPosition());

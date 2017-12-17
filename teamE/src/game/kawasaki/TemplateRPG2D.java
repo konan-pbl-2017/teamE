@@ -1,6 +1,7 @@
 package game.kawasaki;
 
 import java.awt.Color;
+import java.util.Random;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -11,26 +12,33 @@ import framework.RWT.RWTVirtualController;
 import framework.game2D.Sprite;
 import framework.gameMain.BaseScenarioGameContainer;
 import framework.gameMain.SimpleRolePlayingGame;
-import framework.model3D.ModelFactory;
-import framework.model3D.Object3D;
-import framework.model3D.Position3D;
-import framework.model3D.Quaternion3D;
 import framework.model3D.Universe;
-import framework.physics.PhysicsUtility;
 import framework.scenario.Event;
-import framework.scenario.ScenarioManager;
 import framework.scenario.ScenarioState;
+import template.shooting2D.EnemyBullet;
+import template.shooting2D.MyShipBullet;
 
 public class TemplateRPG2D extends SimpleRolePlayingGame {
 	private MapStage map;
 	private Player player;
+	private Player player2;
 	private Sprite king;
 	private Sprite enemy;
 	
 	private Sprite myBase;
-	private Sprite enemySpawn;
-	ArrayList<Sprite> enemyUnitList;
-		
+	//private ArrayList<E> enemyUnitList = new ArrayList<EnemyUnit>();
+	//private ArrayList<EnemyUnit> enemyUnitFromSpawn = new ArrayList<EnemyUnit>();
+	
+	
+	private EnemySpawn enemySpawn;
+	private ArrayList<EnemyUnit> enemyUnitList = new ArrayList<EnemyUnit>();
+	private ArrayList<EnemyUnit> enemyUnitFromSpawn = new ArrayList<EnemyUnit>();
+	
+	
+	private long lastMyShipBulletShootTime = 0;
+	private long lastMyShipBulletShootDanmakuTime = 0;
+	private long lastEnemyShootTime = 0;
+	
 	// 速度によって物体が動いている時にボタンを押せるかどうかを判定するフラグ
 	private boolean disableControl = false;
 
@@ -46,20 +54,35 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		player.setCollisionRadius(0.5);
 		universe.place(player);
 		
+		// プレイヤー2の配置
+		player2 = new Player("data\\RPG\\block.jpg");
+		player2.setPosition(14.0, 14.0);
+		player2.setCollisionRadius(0.5);
+		universe.place(player2);
+		
+		
+		
 		// 自分の基地の配置
-		myBase = new Sprite("data\\RPG\\player.png");
-		myBase.setPosition(30.0, 14.0);
+		myBase = new Sprite("data\\images\\kiti.gif");
+		myBase.setPosition(28.0, 14.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
 		
 		//敵の発生場所
+		enemySpawn = new EnemySpawn("data\\images\\doukutu.jpg");
+		enemySpawn.setPosition(0.0, 14.0);
+		enemySpawn.setCollisionRadius(0.5);
+		universe.place(enemySpawn);
+		
+		/*
 		myBase = new Sprite("data\\RPG\\player.png");
 		myBase.setPosition(0.0, 14.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
+		*/
 		
 		//敵のユニット発生
-		enemyUnitList = new ArrayList<Sprite>();
+		//enemyUnitList = new ArrayList<enemyUnits>();
 		//enemyUnitList = Sprite("data\\RPG\\monster.png");
 		
 		
@@ -72,15 +95,18 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		universe.place(king);
 		*/
 		
+		// mapを画面の中央に
+		//setMapCenter(14.0, 14.0);
+		//setViewRange(32, 32);
 		
 		// プレイヤーを画面の中央に
-		//setCenter(player);
+		setCenter(player2);
 		//setCenter(player);
 		
-		/*
+		
 		// シナリオの設定
 		setScenario("data\\TemplateRPG\\Scenario\\scenario2.xml");
-		*/
+		
 	}
 	
 	@Override
@@ -162,12 +188,107 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		}
 		player.motion(interval, map);
 		
+		//---------------------追加---------
+		
+		// 敵のアクション処理
+		// 弾幕の発射
+		 Random rnd = new Random();
+		if (System.currentTimeMillis() - lastEnemyShootTime > rnd.nextInt(100000)) {
+			enemyUnitFromSpawn = enemySpawn.goEnemyUnits();
+			this.setEnemyUnit(enemyUnitFromSpawn);
+			lastEnemyShootTime = System.currentTimeMillis();
+		}
+
+		// /////////////////////////////////////////////////////////
+		//
+		// 各登場物を動かす処理
+		//
+		// ////////////////////////////////////////////////////////
+
+		// ウィンドウ内に出ようとした時、自機の位置を端に固定する
+			/*
+		if (!(myShipSprite.isInScreen(viewRangeWidth, viewRangeHeight))) {
+			if (myShipSprite.getPosition().getX() >= viewRangeWidth / 2) {
+				myShipSprite.setPosition(viewRangeWidth / 2, myShipSprite.getPosition().getY());
+			}
+			if (myShipSprite.getPosition().getX() <= -1.0 * viewRangeWidth / 2) {
+				myShipSprite.setPosition(-1.0 * viewRangeWidth / 2, myShipSprite.getPosition().getY());
+			}
+			if (myShipSprite.getPosition().getY() >= viewRangeHeight / 2) {
+				myShipSprite.setPosition(myShipSprite.getPosition().getX(), viewRangeHeight / 2);
+			}
+			if (myShipSprite.getPosition().getY() <= -1.0 * viewRangeHeight / 2) {
+				myShipSprite.setPosition(myShipSprite.getPosition().getX(), -1.0 * viewRangeHeight / 2);
+			}
+			myShipSprite.motion(interval);
+		}
+		*/
+			
+		
+			// 敵の弾を動かす。同時にウィンドウ外に出てしまったかどうかを判定し、出てしまったらウインドウから弾を消す。
+			for (int i = 0; i < enemyUnitList.size(); i++) {
+				EnemyUnit enemyUnit = enemyUnitList.get(i);
+				enemyUnit.motion(interval);		// 敵の弾の移動
+				if (enemyUnit.isInScreen((int)viewRangeWidth, (int)viewRangeHeight) == false) {
+					// 敵の弾を消す
+					universe.displace(enemyUnit);
+					enemyUnitList.remove(i);
+				}
+			}
+
+			// /////////////////////////////////////////////////////////
+			//
+			// 各登場物を動かした後の処理
+			//
+			// ////////////////////////////////////////////////////////
+
+			// プレイヤーと〇〇の衝突判定
+			// 衝突判定（プレイヤーと敵の弾）
+			for (int i = 0; i < enemyUnitList.size(); i++) {
+				EnemyUnit enemyUnit = enemyUnitList.get(i);
+				if (myBase.checkCollision(enemyUnit)) {
+					System.out.println("敵の弾" + i + "と衝突した！");
+				}
+			}
+		
+		
+		
 		// 衝突判定
 		if (player.checkCollision(king)) {
 			// プレイヤーと王様がぶつかった場合
 			scenario.fire("王様とぶつかる");	// 「王様とぶつかる」というイベントを発生する（シナリオが進む）
 		}
 	}
+	
+	//--------------------------Shooting progressのあとの部分からひっぱってきた
+	
+	/**
+	 * 弾幕が入ったリスト（myShipBulletFromMyShip）をプレイヤーの弾のリストに設定する
+	 * 
+	 * @param myShipBulletFromMyShip
+	 */
+	/*
+	public void setMyShipBullet(ArrayList<MyShipBullet> myShipBulletFromMyShip) {
+		for (int i = 0; i < myShipBulletFromMyShip.size(); i++) {
+			universe.place(myShipBulletFromMyShip.get(i));
+			this.myShipBulletList.add(myShipBulletFromMyShip.get(i));
+		}
+	}
+	*/
+
+	/**
+	 * 弾幕が入ったリスト（enemyBulletListFromEnemy）を敵の弾のリストに設定する
+	 * 
+	 * @param enemyBulletListFromEnemy
+	 */
+	public void setEnemyUnit(ArrayList<EnemyUnit> enemyUnitListFromSpawn) {
+		for (int i = 0; i < enemyUnitListFromSpawn.size(); i++) {
+			universe.place(enemyUnitListFromSpawn.get(i));
+			this.enemyUnitList.add(enemyUnitListFromSpawn.get(i));
+		}
+	}
+	
+	//------------------------------------------------------------------
 
 	@Override
 	public void action(String action, Event event, ScenarioState nextState) {
@@ -178,6 +299,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 			changeToMainContainer();
 		}
 	}
+	
 
 	/**
 	 * ゲームのメイン

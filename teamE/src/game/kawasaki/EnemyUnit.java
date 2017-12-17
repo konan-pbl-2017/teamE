@@ -5,7 +5,7 @@ import framework.game2D.Sprite;
 
 public class EnemyUnit extends Sprite {
 	public EnemyUnit(String imageFile) {
-		super(imageFile, 0.2f);
+		super(imageFile, 1.0f);
 		setCollisionRadius(0.2);
 	}
 
@@ -25,11 +25,11 @@ public class EnemyUnit extends Sprite {
 	 *            --- ウィンドウの高さ
 	 * @return
 	 */
-	public boolean isInScreen(int width, int height) {
-		if (this.getPosition().getX() < width / 2.0
-				&& this.getPosition().getX() > -1.0 * width / 2.0) {
-			if (this.getPosition().getY() < height / 2.0
-					&& this.getPosition().getY() > -1.0 * height / 2.0) {
+	public boolean isInScreen(double width, double height) {
+		if (this.getPosition().getX() < width / 1.0
+				&& this.getPosition().getX() > -1.0 * width / 1.0) {
+			if (this.getPosition().getY() < height / 1.0
+					&& this.getPosition().getY() > -1.0 * height / 1.0) {
 				return true;
 			}
 		}
