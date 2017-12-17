@@ -18,11 +18,11 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 
 	private MapStage map;
 	private Player player;
-	private Player player2;
+	private Player castle[] =new Player[35];
 	private Sprite king;
 	private Sprite enemy;
-	
-	
+	int castlenum=0;
+
 
 	// 速度によって物体が動いている時にボタンを押せるかどうかを判定するフラグ
 	private boolean disableControl = false;
@@ -38,12 +38,13 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		player.setPosition(14.0, 14.0);
 		player.setCollisionRadius(0.5);
 		universe.place(player);
-		// プレイヤー2の配置
-		player2 = new Player("data\\RPG\\block.jpg");
-		player2.setPosition(14.0, 14.0);
-		player2.setCollisionRadius(0.5);
-		universe.place(player2);
-
+		// ユニットの配置
+		for(int i=0;i<30;i++){
+		castle[i] = new Player("data\\RPG\\block.jpg");
+		castle[i].setPosition(-1,-1);
+		castle[i].setCollisionRadius(0.5);
+		universe.place(castle[i]);
+		}
 		// mapを画面の中央に
 		setMapCenter(14.0, 14.0);
 		setViewRange(30, 30);
@@ -140,10 +141,22 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 
 
 
-		if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)) {
-				player2.setPosition(player.getPosition());//城の配置
-		}
 
+
+
+
+
+
+		
+		//if (!virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)){ 
+			//System.out.println("押されてません");
+			if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)) {
+				//System.out.println("押されてます");
+				castle[castlenum].setPosition(player.getPosition());//城の配置
+				castlenum++;
+				if(castlenum>=30)castlenum=0;
+
+		}//}
 
 		player.motion(interval, map);
 		// 衝突判定
