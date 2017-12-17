@@ -15,13 +15,14 @@ import framework.scenario.ScenarioState;
 
 
 public class TemplateRPG2D extends SimpleRolePlayingGame {
-	static int setlocateX=9;
-	static int setlocateY=9;
+
 	private MapStage map;
 	private Player player;
 	private Player player2;
 	private Sprite king;
 	private Sprite enemy;
+	
+	
 
 	// 速度によって物体が動いている時にボタンを押せるかどうかを判定するフラグ
 	private boolean disableControl = false;
@@ -38,7 +39,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		player.setCollisionRadius(0.5);
 		universe.place(player);
 		// プレイヤー2の配置
-		player2 = new Player("data\\RPG\\player.png");
+		player2 = new Player("data\\RPG\\block.jpg");
 		player2.setPosition(14.0, 14.0);
 		player2.setCollisionRadius(0.5);
 		universe.place(player2);
@@ -106,8 +107,6 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		//初期位置に戻す
 		if(virtualController.isKeyDown(0, RWTVirtualController.BUTTON_A)){
 			player.setPosition(14.0, 14.0);
-			TemplateRPG2D.setlocateX=9;
-			TemplateRPG2D.setlocateY=9;
 		}
 		// キャラが移動していなければ、キー操作の処理を行える。
 		if(!disableControl){
@@ -115,39 +114,38 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		/*	if (virtualController.isKeyDown(0, RWTVirtualController.LEFT)&&virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
 				player.setVelocity(-10.0, -10.0);
 				disableControl = true;//斜め移動
-				
+
 			}*/
 			// 左
 			if (virtualController.isKeyDown(0, RWTVirtualController.LEFT)) {
 				player.setVelocity(-10.0, 0.0);
 				disableControl = true;
-				TemplateRPG2D.setlocateX--;
 			}
 			// 右
 			else if (virtualController.isKeyDown(0, RWTVirtualController.RIGHT)) {
 				player.setVelocity(10.0, 0.0);
 				disableControl = true;
-				TemplateRPG2D.setlocateX++;
 			}
 			// 上
 			else if (virtualController.isKeyDown(0, RWTVirtualController.UP)) {
 				player.setVelocity(0.0, 10.0);
 				disableControl = true;
-				TemplateRPG2D.setlocateY--;
 			}
 			// 下
 			else if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
 				player.setVelocity(0.0, -10.0);
 				disableControl = true;
-				TemplateRPG2D.setlocateY++;
 			}
 		}
-		if(virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)){
-			player2.setPosition(setlocateX,20-setlocateY);
 
+
+
+		if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)) {
+				player2.setPosition(player.getPosition());//城の配置
 		}
+
+
 		player.motion(interval, map);
-		System.out.println("X="+ setlocateX+",Y="+setlocateY);
 		// 衝突判定
 		if (player.checkCollision(king)) {
 			// プレイヤーと王様がぶつかった場合
