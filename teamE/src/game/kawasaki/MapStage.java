@@ -13,7 +13,7 @@ public class MapStage extends Map2D {
 	public MapStage() {
 		super(new String[]{
 				
-				/*
+				
 				"data\\RPG\\grass1.jpg",
 				"data\\RPG\\grass2.jpg",
 				"data\\RPG\\road1.jpg",
@@ -21,16 +21,16 @@ public class MapStage extends Map2D {
 				"data\\RPG\\block.jpg",
 				"data\\RPG\\sea1.jpg",
 				"data\\RPG\\road1.jpg",
-				"data\\RPG\\red-background.jpg"},				
-				*/
+				"data\\RPG\\beach.jpg"},				
 				
+				/*
 				"data\\RPG\\grass1.jpg",
 				"data\\RPG\\grass2.jpg",
 				"data\\RPG\\road1.jpg",
 				"data\\RPG\\tree.jpg",		// Ç±Ç±Ç©ÇÁâ∫ÇÕè·äQï®
 				"data\\RPG\\block.jpg",
 				"data\\RPG\\sea1.jpg",},
-				
+				*/
 		3);
 		
 	}
@@ -41,7 +41,7 @@ public class MapStage extends Map2D {
 	public int[][] createMap() {
 		int[][] map = {
 				
-				/*
+				
 				{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,3,3},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
@@ -59,9 +59,9 @@ public class MapStage extends Map2D {
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,3,3}				
-				*/
 				
 				
+				/*
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -77,7 +77,7 @@ public class MapStage extends Map2D {
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},	
-					
+				*/
 		};
 		return map;
 	}

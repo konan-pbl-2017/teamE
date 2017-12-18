@@ -63,14 +63,14 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		
 		
 		// ©•ª‚ÌŠî’n‚Ì”z’u
-		myBase = new Sprite("data\\images\\kiti.gif");
-		myBase.setPosition(28.0, 14.0);
+		myBase = new Sprite("data\\images\\MyShip.gif");
+		myBase.setPosition(34.0, 16.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
 		
 		//“G‚Ì”­¶êŠ
-		enemySpawn = new EnemySpawn("data\\images\\doukutu.jpg");
-		enemySpawn.setPosition(0.0, 14.0);
+		enemySpawn = new EnemySpawn("data\\images\\Enemy.gif");
+		enemySpawn.setPosition(0.0, 16.0);
 		enemySpawn.setCollisionRadius(0.5);
 		universe.place(enemySpawn);
 		
@@ -231,8 +231,8 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 				enemyUnit.motion(interval);		// “G‚Ì’e‚ÌˆÚ“®
 				if (enemyUnit.isInScreen((int)viewRangeWidth, (int)viewRangeHeight) == false) {
 					// “G‚Ì’e‚ğÁ‚·
-					universe.displace(enemyUnit);
-					enemyUnitList.remove(i);
+					//universe.displace(enemyUnit);
+					//enemyUnitList.remove(i);
 				}
 			}
 
