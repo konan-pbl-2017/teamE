@@ -67,15 +67,15 @@ public class EnemySpawn extends Sprite {
 		
 		ArrayList<EnemyUnit> enemyBulletList = new ArrayList<EnemyUnit>();
 		for (int i = 0; i < MAX_DANMAKU; i++) {
-			EnemyUnit enemyBullet = new EnemyUnit("data\\images\\Enemy.gif");
+			EnemyUnit enemyBullet = new EnemyUnit("data\\images\\enemyBullet.gif");
 
 			//‚Ü‚Á‚·‚®i‚Þ“G
-			//bulletX = BULLET_DISTANCE * 0.8;
-			//bulletY = 0;
+			bulletX = BULLET_DISTANCE * 0.8;
+			bulletY = 0;
 			
 			//•úŽËó‚Éo‚é’e
-			bulletX = BULLET_DISTANCE * (Math.cos(i * (2 * Math.PI / MAX_DANMAKU)));
-			bulletY = BULLET_DISTANCE * (Math.sin(i * (2 * Math.PI / MAX_DANMAKU)));
+			//bulletX = BULLET_DISTANCE * (Math.cos(i * (2 * Math.PI / MAX_DANMAKU)));
+			//bulletY = BULLET_DISTANCE * (Math.sin(i * (2 * Math.PI / MAX_DANMAKU)));
 
 			// ’e‚ÌˆÊ’u‚ðÝ’è
 			enemyBullet.setPosition(this.getPosition());
