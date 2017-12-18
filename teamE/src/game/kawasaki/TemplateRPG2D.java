@@ -25,7 +25,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	private Sprite king;
 	private Sprite enemy;
 	
-	private Sprite myBase;
+	private MyBase myBase;
 	//private ArrayList<E> enemyUnitList = new ArrayList<EnemyUnit>();
 	//private ArrayList<EnemyUnit> enemyUnitFromSpawn = new ArrayList<EnemyUnit>();
 	
@@ -38,6 +38,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	private long lastMyShipBulletShootTime = 0;
 	private long lastMyShipBulletShootDanmakuTime = 0;
 	private long lastEnemyShootTime = 0;
+	private long lastEnemyMeetTime = 0;
 	
 	// ‘¬“x‚É‚æ‚Á‚Ä•¨‘Ì‚ª“®‚¢‚Ä‚¢‚é‚Éƒ{ƒ^ƒ“‚ğ‰Ÿ‚¹‚é‚©‚Ç‚¤‚©‚ğ”»’è‚·‚éƒtƒ‰ƒO
 	private boolean disableControl = false;
@@ -63,13 +64,13 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		
 		
 		// ©•ª‚ÌŠî’n‚Ì”z’u
-		myBase = new Sprite("data\\images\\MyShip.gif");
-		myBase.setPosition(34.0, 16.0);
+		myBase = new MyBase("data\\images\\kiti.gif");
+		myBase.setPosition(30.0, 16.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
 		
 		//“G‚Ì”­¶êŠ
-		enemySpawn = new EnemySpawn("data\\images\\Enemy.gif");
+		enemySpawn = new EnemySpawn("data\\images\\doukutu.jpg");
 		enemySpawn.setPosition(0.0, 16.0);
 		enemySpawn.setCollisionRadius(0.5);
 		universe.place(enemySpawn);
@@ -96,12 +97,11 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		*/
 		
 		// map‚ğ‰æ–Ê‚Ì’†‰›‚É
-		//setMapCenter(14.0, 14.0);
-		//setViewRange(32, 32);
+		setMapCenter(0.0, 0.0);
+		setViewRange(32, 32);
 		
 		// ƒvƒŒƒCƒ„[‚ğ‰æ–Ê‚Ì’†‰›‚É
 		setCenter(player2);
-		//setCenter(player);
 		
 		
 		// ƒVƒiƒŠƒI‚Ìİ’è
@@ -231,8 +231,8 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 				enemyUnit.motion(interval);		// “G‚Ì’e‚ÌˆÚ“®
 				if (enemyUnit.isInScreen((int)viewRangeWidth, (int)viewRangeHeight) == false) {
 					// “G‚Ì’e‚ğÁ‚·
-					//universe.displace(enemyUnit);
-					//enemyUnitList.remove(i);
+					universe.displace(enemyUnit);
+					enemyUnitList.remove(i);
 				}
 			}
 
@@ -244,12 +244,40 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 
 			// ƒvƒŒƒCƒ„[‚ÆZZ‚ÌÕ“Ë”»’è
 			// Õ“Ë”»’èiƒvƒŒƒCƒ„[‚Æ“G‚Ì’ej
+			//myBase.myBaseHP=100;
+			
 			for (int i = 0; i < enemyUnitList.size(); i++) {
+				
 				EnemyUnit enemyUnit = enemyUnitList.get(i);
+				lastEnemyMeetTime = System.currentTimeMillis();
 				if (myBase.checkCollision(enemyUnit)) {
-					System.out.println("“G‚Ì’e" + i + "‚ÆÕ“Ë‚µ‚½I");
+					//Ÿ‚ÌŠÔŠu‚ÅUŒ‚
+					//if (System.currentTimeMillis() - lastEnemyMeetTime > 1000){
+						System.out.println(myBase.myBaseHP);
+						//myBase.myBaseHP=(myBase.myBaseHP-enemySpawn.enemyAttack);
+						enemyUnit.enemyHP=enemyUnit.enemyHP-1;
+						System.out.println("“G( " + i + " )‚©‚çUŒ‚‚ğó‚¯‚½I");
+					//}
 				}
 			}
+			
+			//“G‚ğ“|‚µ‚½‚Æ‚«‚ÉA‰æ–Ê‚©‚çÁ‚·
+			for (int i = 0; i < enemyUnitList.size(); i++) {
+				EnemyUnit enemyUnit = enemyUnitList.get(i);
+				enemyUnit.motion(interval);		// “G‚Ì’e‚ÌˆÚ“®
+				if (enemyUnit.enemyHP < 0) {
+					// “G‚Ì’e‚ğÁ‚·
+					universe.displace(enemyUnit);
+					enemyUnitList.remove(i);
+				}
+			}
+			
+			//©•ª‚Ì•Ç‚ª”j‚ç‚ê‚½‚Æ‚«
+			if(myBase.myBaseHP < 0){
+				System.out.println("“|‚³‚ê‚Ü‚µ‚½");
+				System.exit(0);
+			}
+			
 		
 		
 		

@@ -20,7 +20,7 @@ public class MapStage extends Map2D {
 				"data\\RPG\\block.jpg",
 				"data\\RPG\\sea1.jpg",
 				"data\\RPG\\road1.jpg",
-				"data\\RPG\\red-background.jpg"},
+				"data\\RPG\\road1.jpg"},
 		3);
 	}
 

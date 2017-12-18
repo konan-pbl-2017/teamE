@@ -9,6 +9,8 @@ public class EnemyUnit extends Sprite {
 		setCollisionRadius(0.2);
 	}
 
+	public int enemyHP = 100;
+	public int enemyAttack = 10;
 
 	// ////////////////////////////////////////////////////
 	//

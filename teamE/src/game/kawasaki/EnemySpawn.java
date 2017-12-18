@@ -10,7 +10,8 @@ public class EnemySpawn extends Sprite {
 	// 衝突判定用のBoundingSphereの半径
 	public double collisionRadius = 1.0;
 
-	private int enemyHP = 100;
+	public int enemyHP = 100;
+	public int enemyAttack = 10;
 
 	// 弾幕の最大数
 	private final int MAX_DANMAKU = 1;
@@ -67,7 +68,7 @@ public class EnemySpawn extends Sprite {
 		
 		ArrayList<EnemyUnit> enemyBulletList = new ArrayList<EnemyUnit>();
 		for (int i = 0; i < MAX_DANMAKU; i++) {
-			EnemyUnit enemyBullet = new EnemyUnit("data\\images\\enemyBullet.gif");
+			EnemyUnit enemyBullet = new EnemyUnit("data\\images\\Enemy.gif");
 
 			//まっすぐ進む敵
 			bulletX = BULLET_DISTANCE * 0.8;
@@ -87,7 +88,12 @@ public class EnemySpawn extends Sprite {
 
 		return enemyBulletList;
 	}
-
+	
+	//敵が壁の前で停止する場合
+	
+	
+	
+	
 	// ////////////////////////////////////////////////////
 	//
 	// 敵がウィンドウ内にいるかどうかのメソッド
