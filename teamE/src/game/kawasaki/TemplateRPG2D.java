@@ -34,7 +34,6 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	private ArrayList<EnemyUnit> enemyUnitList = new ArrayList<EnemyUnit>();
 	private ArrayList<EnemyUnit> enemyUnitFromSpawn = new ArrayList<EnemyUnit>();
 	
-	
 	private long lastMyShipBulletShootTime = 0;
 	private long lastMyShipBulletShootDanmakuTime = 0;
 	private long lastEnemyShootTime = 0;
@@ -86,15 +85,6 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		//enemyUnitList = new ArrayList<enemyUnits>();
 		//enemyUnitList = Sprite("data\\RPG\\monster.png");
 		
-		
-		
-		/*
-		// ‰¤—l‚Ì”z’u
-		king = new Sprite("data\\RPG\\king.png");
-		king.setPosition(18.0, 24.0);
-		king.setCollisionRadius(0.5);
-		universe.place(king);
-		*/
 		
 		// map‚ð‰æ–Ê‚Ì’†‰›‚É
 		setMapCenter(0.0, 0.0);
