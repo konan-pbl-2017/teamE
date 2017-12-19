@@ -20,7 +20,7 @@ public class MapStage extends Map2D {
 				"data\\RPG\\block.jpg",
 				"data\\RPG\\sea1.jpg",
 				"data\\RPG\\road1.jpg",
-				"data\\RPG\\road1.jpg"},
+				"data\\towerdefence\\red-background.jpg"},
 		3);
 	}
 
@@ -36,9 +36,7 @@ public class MapStage extends Map2D {
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
-				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6,7,2},
-				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
@@ -47,13 +45,13 @@ public class MapStage extends Map2D {
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,3,3}
 		};
-		
-		
+
+
 		return map;
 	}
 
-	
-	
+
+
 	public boolean checkGridPoint(Player mazeSpritePlayer) {
 		// ä€ÇﬂåÎç∑èàóùópïœêîÇÃê∂ê¨
 		double mazeSpritePositionX = new BigDecimal(mazeSpritePlayer
@@ -75,5 +73,5 @@ public class MapStage extends Map2D {
 		}
 		return false;
 	}
-	
+
 }

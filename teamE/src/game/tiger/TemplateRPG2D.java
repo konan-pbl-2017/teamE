@@ -22,8 +22,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	private Sprite king;
 	private Sprite enemy;
 	int castlenum=0;
-
-
+	boolean castleable=true;//城が置ける状態か否か:by.tiger
 	// 速度によって物体が動いている時にボタンを押せるかどうかを判定するフラグ
 	private boolean disableControl = false;
 
@@ -34,7 +33,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		camera.addTarget(map);
 
 		// プレイヤーの配置
-		player = new Player("data\\RPG\\player.png");
+		player = new Player("data\\RPG\\player.jpg");
 		player.setPosition(14.0, 14.0);
 		player.setCollisionRadius(0.5);
 		universe.place(player);
@@ -121,45 +120,39 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 			if (virtualController.isKeyDown(0, RWTVirtualController.LEFT)) {
 				player.setVelocity(-10.0, 0.0);
 				disableControl = true;
+				castleable=true;//城を置ける状態にする:by.tiger
 			}
 			// 右
 			else if (virtualController.isKeyDown(0, RWTVirtualController.RIGHT)) {
 				player.setVelocity(10.0, 0.0);
 				disableControl = true;
+				castleable=true;//城を置ける状態にする:by.tiger
 			}
 			// 上
 			else if (virtualController.isKeyDown(0, RWTVirtualController.UP)) {
 				player.setVelocity(0.0, 10.0);
 				disableControl = true;
+				castleable=true;//城を置ける状態にする:by.tiger
 			}
 			// 下
 			else if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
 				player.setVelocity(0.0, -10.0);
 				disableControl = true;
+				castleable=true;//城を置ける状態にする:by.tiger
 			}
 		}
 
 
-
-
-
-
-
-
-
-		
-		//if (!virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)){ 
-			//System.out.println("押されてません");
-			if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)) {
-				//System.out.println("押されてます");
+			if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)&&castleable==true) {
 				castle[castlenum].setPosition(player.getPosition());//城の配置
 				castlenum++;
 				if(castlenum>=30)castlenum=0;
+				castleable=false;
 
 		}//}
 
 		player.motion(interval, map);
-		// 衝突判定
+		// 衝突判定:城の撃つ弾と敵の当たり判定に使う
 		if (player.checkCollision(king)) {
 			// プレイヤーと王様がぶつかった場合
 			scenario.fire("王様とぶつかる");	// 「王様とぶつかる」というイベントを発生する（シナリオが進む）
