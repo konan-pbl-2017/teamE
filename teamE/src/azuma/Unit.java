@@ -4,13 +4,13 @@ import framework.game2D.Sprite;
 
 public class Unit extends Sprite{
 	
-	int unitHP = 20;
+	int unitHP=20;
 	
 	public Unit(String imageFile) {
 		super(imageFile);
 	}
 	
-	public boolean shootDown() {
+	public boolean unitBreak() {
 		if (unitHP <= 0) {
 			return true;
 		} else {
@@ -18,11 +18,11 @@ public class Unit extends Sprite{
 		}
 	}
 
-	public void addEnemyHP(int value) {
+	public void addunitHP(int value) {
 		unitHP += value;
 	}
 
-	public int getEnemyHP() {
+	public int getunitHP() {
 		return unitHP;
 	}
 

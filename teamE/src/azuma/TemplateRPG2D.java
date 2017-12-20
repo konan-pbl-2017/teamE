@@ -3,10 +3,13 @@ package azuma;
 import java.awt.Color;
 import java.math.BigDecimal;
 
+import javax.vecmath.Vector2d;
+
 import framework.RWT.RWTContainer;
 import framework.RWT.RWTFrame3D;
 import framework.RWT.RWTVirtualController;
 import framework.game2D.Sprite;
+import framework.game2D.Velocity2D;
 import framework.gameMain.BaseScenarioGameContainer;
 import framework.gameMain.SimpleRolePlayingGame;
 import framework.model3D.Universe;
@@ -19,13 +22,15 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	private MapStage map;
 	private Player player;
 	private Unit unit[] =new Unit[35];
+	private UnitBullet unitbullet[] = new UnitBullet[35];
 	private Sprite king;
 	private Sprite enemy;
 	int unitnum=0;
 	boolean unitable=true;//城が置ける状態か否か:by.tiger
 	// 速度によって物体が動いている時にボタンを押せるかどうかを判定するフラグ
 	private boolean disableControl = false;
-
+	private long BulletTime;
+	
 	@Override
 	public void init(Universe universe) {
 		map = new MapStage();
@@ -39,11 +44,15 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		universe.place(player);
 		// ユニットの配置
 		for(int i=0;i<30;i++){
-		unit[i] = new Unit("data\\RPG\\block.jpg");
-		unit[i].setPosition(-1,-1);
-		unit[i].setCollisionRadius(0.5);
-		universe.place(unit[i]);
+			unit[i] = new Unit("data\\RPG\\block.jpg");
+			unit[i].setPosition(-1,-1);
+			unit[i].setCollisionRadius(0.5);
+			universe.place(unit[i]);
 		}
+		
+		
+		
+
 		// mapを画面の中央に
 		setMapCenter(14.0, 14.0);
 		setViewRange(30, 30);
@@ -115,7 +124,8 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 				player.setVelocity(-10.0, -10.0);
 				disableControl = true;//斜め移動
 
-			}*/
+			}*/			
+			
 			// 左
 			if (virtualController.isKeyDown(0, RWTVirtualController.LEFT)) {
 				player.setVelocity(-10.0, 0.0);
@@ -143,13 +153,39 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		}
 
 
-			if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)&&unitable==true) {
-				unit[unitnum].setPosition(player.getPosition());//城の配置
-				unitnum++;
-				if(unitnum>=30)unitnum=0;
-				unitable=false;
+		if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)&&unitable==true) {
+			unit[unitnum].setPosition(player.getPosition());//城の配置
+			unitnum++;
+			if(unitnum>=30)unitnum=0;
+			unitable=false;
 
-		}//}
+		}
+		
+		//}
+			
+		//弾の発射
+		
+		for(int i=0; i<unitnum; i++){
+		
+//				if (System.currentTimeMillis() - BulletTime > 1000) {
+				if(unit[i].unitHP>0 && unitbullet[i] == null){
+					unitbullet[i] = new UnitBullet("data\\images\\myBullet.gif");
+					unitbullet[i].setPosition(unit[i].getPosition());
+					unitbullet[i].setVelocity(new Velocity2D(0.0, -10.0));
+					universe.place(unitbullet[i]);
+					unit[i].addunitHP(-1);
+					
+				}
+//				}
+			if (unitbullet[i] != null) unitbullet[i].motion(interval);
+			
+			if(unit[i].unitBreak()){
+				System.out.println("ユニット球切れしました");
+				universe.displace(unit[i]);
+			}
+		
+		}
+
 
 		player.motion(interval, map);
 		// 衝突判定:城の撃つ弾と敵の当たり判定に使う
