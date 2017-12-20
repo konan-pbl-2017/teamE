@@ -1,3 +1,4 @@
+// auther kawasaki
 package game.kawasaki;
 
 import java.awt.Color;
@@ -215,58 +216,94 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		*/
 			
 		
-			// “G‚Ì’e‚ğ“®‚©‚·B“¯‚ÉƒEƒBƒ“ƒhƒEŠO‚Éo‚Ä‚µ‚Ü‚Á‚½‚©‚Ç‚¤‚©‚ğ”»’è‚µAo‚Ä‚µ‚Ü‚Á‚½‚çƒEƒCƒ“ƒhƒE‚©‚ç’e‚ğÁ‚·B
-			for (int i = 0; i < enemyUnitList.size(); i++) {
-				EnemyUnit enemyUnit = enemyUnitList.get(i);
-				enemyUnit.motion(interval);		// “G‚Ì’e‚ÌˆÚ“®
-				if (enemyUnit.isInScreen((int)viewRangeWidth, (int)viewRangeHeight) == false) {
-					// “G‚Ì’e‚ğÁ‚·
-					universe.displace(enemyUnit);
-					enemyUnitList.remove(i);
-				}
+		// “G‚Ì’e‚ğ“®‚©‚·B“¯‚ÉƒEƒBƒ“ƒhƒEŠO‚Éo‚Ä‚µ‚Ü‚Á‚½‚©‚Ç‚¤‚©‚ğ”»’è‚µAo‚Ä‚µ‚Ü‚Á‚½‚çƒEƒCƒ“ƒhƒE‚©‚ç’e‚ğÁ‚·B
+		for (int i = 0; i < enemyUnitList.size(); i++) {
+			EnemyUnit enemyUnit = enemyUnitList.get(i);
+			enemyUnit.motion(interval);		// “G‚Ì’e‚ÌˆÚ“®
+			if (enemyUnit.isInScreen((int)viewRangeWidth, (int)viewRangeHeight) == false) {
+				// “G‚Ì’e‚ğÁ‚·
+				universe.displace(enemyUnit);
+				enemyUnitList.remove(i);
 			}
+		}
 
-			// /////////////////////////////////////////////////////////
-			//
-			// Še“oê•¨‚ğ“®‚©‚µ‚½Œã‚Ìˆ—
-			//
-			// ////////////////////////////////////////////////////////
+		// /////////////////////////////////////////////////////////
+		//
+		// Še“oê•¨‚ğ“®‚©‚µ‚½Œã‚Ìˆ—
+		//
+		// ////////////////////////////////////////////////////////
 
-			// ƒvƒŒƒCƒ„[‚ÆZZ‚ÌÕ“Ë”»’è
-			// Õ“Ë”»’èiƒvƒŒƒCƒ„[‚Æ“G‚Ì’ej
-			//myBase.myBaseHP=100;
+		// ƒvƒŒƒCƒ„[‚ÆZZ‚ÌÕ“Ë”»’è
+		// Õ“Ë”»’èiƒvƒŒƒCƒ„[‚Æ“G‚Ì’ej
 			
-			for (int i = 0; i < enemyUnitList.size(); i++) {
+		//©•ª‚ÌŠî’n‚Æ‚Ì“–‚½‚è”»’è‚É—˜—p‚·‚é.kawasaki
+		//myBase.myBaseHP=100;
+		/*
+		for (int i = 0; i < enemyUnitList.size(); i++) {
 				
-				EnemyUnit enemyUnit = enemyUnitList.get(i);
-				lastEnemyMeetTime = System.currentTimeMillis();
+			EnemyUnit enemyUnit = enemyUnitList.get(i);
+			enemyUnit.HP = enemyUnitList.get(i).HP;
+			lastEnemyMeetTime = System.currentTimeMillis();
+			if (myBase.checkCollision(enemyUnit)) {
+				//Ÿ‚ÌŠÔŠu‚ÅUŒ‚
+				//if (System.currentTimeMillis() - lastEnemyMeetTime > 100){
+					System.out.println(myBase.myBaseHP);
+					System.out.println(enemyUnit.HP);
+					myBase.myBaseHP=(myBase.myBaseHP-enemySpawn.enemyAttack);
+					enemyUnit.HP=enemyUnit.HP-10;//“G‚àƒ_ƒ[ƒWó‚¯‚é
+					System.out.println("“G( " + i + " )‚©‚çUŒ‚‚ğó‚¯‚½I");
+					enemySpawn.bulletX =0 ;
+				//}
+			}
+			System.out.println("Base HP = " + myBase.myBaseHP);
+			System.out.println(i + "”Ô–Ú" + "enemy HP = " + enemyUnit.HP);
+		}
+			
+		//“G‚ğ“|‚µ‚½‚Æ‚«‚ÉA‰æ–Ê‚©‚çÁ‚·
+		for (int i = 0; i < enemyUnitList.size(); i++) {
+			EnemyUnit enemyUnit = enemyUnitList.get(i);
+			//enemyUnit.motion(interval);		// “G‚Ì’e‚ÌˆÚ“®
+			if (enemyUnit.HP < 0) {
+				// “G‚Ì’e‚ğÁ‚·
+				//universe.displace(enemyUnit);
+				//enemyUnitList.remove(i);
+			}
+		}
+		*/
+		
+		//-------------------------------------12/19.kawasaki
+		// Õ“Ë”»’èiƒvƒŒƒCƒ„[‚Ì’e‚Æ“G‚Ì’ej
+		//“Gƒ†ƒjƒbƒg‚ªÁ‚¦‚éˆ—
+		
+		//for (int i = 0; i < myShipBulletList.size(); i++) {
+			//MyShipBullet myShipBullet = myShipBulletList.get(i);
+			for (int j = 0; j < enemyUnitList.size(); j++) {
+				EnemyUnit enemyUnit = enemyUnitList.get(j);
 				if (myBase.checkCollision(enemyUnit)) {
-					//Ÿ‚ÌŠÔŠu‚ÅUŒ‚
-					//if (System.currentTimeMillis() - lastEnemyMeetTime > 1000){
-						System.out.println(myBase.myBaseHP);
-						//myBase.myBaseHP=(myBase.myBaseHP-enemySpawn.enemyAttack);
-						enemyUnit.enemyHP=enemyUnit.enemyHP-1;
-						System.out.println("“G( " + i + " )‚©‚çUŒ‚‚ğó‚¯‚½I");
-					//}
+					
+					System.out.println(myBase.myBaseHP);
+					System.out.println(enemyUnit.HP);
+					myBase.myBaseHP=(myBase.myBaseHP-enemySpawn.enemyAttack);
+					enemyUnit.HP=enemyUnit.HP-10;//“G‚àƒ_ƒ[ƒWó‚¯‚é
+					System.out.println("“G( " + j + " )‚©‚çUŒ‚‚ğó‚¯‚½I");
+					enemySpawn.bulletX =0 ;
+					
 				}
-			}
-			
-			//“G‚ğ“|‚µ‚½‚Æ‚«‚ÉA‰æ–Ê‚©‚çÁ‚·
-			for (int i = 0; i < enemyUnitList.size(); i++) {
-				EnemyUnit enemyUnit = enemyUnitList.get(i);
-				enemyUnit.motion(interval);		// “G‚Ì’e‚ÌˆÚ“®
-				if (enemyUnit.enemyHP < 0) {
+				if (myBase.checkCollision(enemyUnit)) {
 					// “G‚Ì’e‚ğÁ‚·
+					System.out.println("ƒvƒŒƒCƒ„[" + /*i + */"‚ª“G‚Ì’e" + j + "‚ÆÕ“Ë‚µ‚½I");
 					universe.displace(enemyUnit);
-					enemyUnitList.remove(i);
+					enemyUnitList.remove(j);
 				}
 			}
+		//}
+		//-------------------------------------
 			
-			//©•ª‚Ì•Ç‚ª”j‚ç‚ê‚½‚Æ‚«
-			if(myBase.myBaseHP < 0){
-				System.out.println("“|‚³‚ê‚Ü‚µ‚½");
-				System.exit(0);
-			}
+		//©•ª‚Ì•Ç‚ª”j‚ç‚ê‚½‚Æ‚«
+		if(myBase.myBaseHP < 0){
+			System.out.println("“|‚³‚ê‚Ü‚µ‚½");
+			System.exit(0);
+		}
 			
 		
 		
