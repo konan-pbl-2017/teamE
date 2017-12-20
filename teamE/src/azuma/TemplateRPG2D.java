@@ -18,11 +18,11 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 
 	private MapStage map;
 	private Player player;
-	private Player castle[] =new Player[35];
+	private Unit unit[] =new Unit[35];
 	private Sprite king;
 	private Sprite enemy;
-	int castlenum=0;
-	boolean castleable=true;//城が置ける状態か否か:by.tiger
+	int unitnum=0;
+	boolean unitable=true;//城が置ける状態か否か:by.tiger
 	// 速度によって物体が動いている時にボタンを押せるかどうかを判定するフラグ
 	private boolean disableControl = false;
 
@@ -39,10 +39,10 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		universe.place(player);
 		// ユニットの配置
 		for(int i=0;i<30;i++){
-		castle[i] = new Player("data\\RPG\\block.jpg");
-		castle[i].setPosition(-1,-1);
-		castle[i].setCollisionRadius(0.5);
-		universe.place(castle[i]);
+		unit[i] = new Unit("data\\RPG\\block.jpg");
+		unit[i].setPosition(-1,-1);
+		unit[i].setCollisionRadius(0.5);
+		universe.place(unit[i]);
 		}
 		// mapを画面の中央に
 		setMapCenter(14.0, 14.0);
@@ -120,34 +120,34 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 			if (virtualController.isKeyDown(0, RWTVirtualController.LEFT)) {
 				player.setVelocity(-10.0, 0.0);
 				disableControl = true;
-				castleable=true;//城を置ける状態にする:by.tiger
+				unitable=true;//城を置ける状態にする:by.tiger
 			}
 			// 右
 			else if (virtualController.isKeyDown(0, RWTVirtualController.RIGHT)) {
 				player.setVelocity(10.0, 0.0);
 				disableControl = true;
-				castleable=true;//城を置ける状態にする:by.tiger
+				unitable=true;//城を置ける状態にする:by.tiger
 			}
 			// 上
 			else if (virtualController.isKeyDown(0, RWTVirtualController.UP)) {
 				player.setVelocity(0.0, 10.0);
 				disableControl = true;
-				castleable=true;//城を置ける状態にする:by.tiger
+				unitable=true;//城を置ける状態にする:by.tiger
 			}
 			// 下
 			else if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
 				player.setVelocity(0.0, -10.0);
 				disableControl = true;
-				castleable=true;//城を置ける状態にする:by.tiger
+				unitable=true;//城を置ける状態にする:by.tiger
 			}
 		}
 
 
-			if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)&&castleable==true) {
-				castle[castlenum].setPosition(player.getPosition());//城の配置
-				castlenum++;
-				if(castlenum>=30)castlenum=0;
-				castleable=false;
+			if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B)&&unitable==true) {
+				unit[unitnum].setPosition(player.getPosition());//城の配置
+				unitnum++;
+				if(unitnum>=30)unitnum=0;
+				unitable=false;
 
 		}//}
 
