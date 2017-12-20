@@ -18,6 +18,9 @@ import framework.scenario.Event;
 import framework.scenario.ScenarioState;
 import template.shooting2D.EnemyBullet;
 import template.shooting2D.MyShipBullet;
+import framework.game2D.Sprite;
+import framework.game2D.Velocity2D;
+import template.shooting2D.TemplateShooting2D;
 
 public class TemplateRPG2D extends SimpleRolePlayingGame {
 	private MapStage map;
@@ -65,13 +68,13 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		
 		// 自分の基地の配置
 		myBase = new MyBase("data\\images\\kiti.gif");
-		myBase.setPosition(30.0, 16.0);
+		myBase.setPosition(28.0, 14.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
 		
 		//敵の発生場所
 		enemySpawn = new EnemySpawn("data\\images\\doukutu.jpg");
-		enemySpawn.setPosition(0.0, 16.0);
+		enemySpawn.setPosition(0.0, 14.0);
 		enemySpawn.setCollisionRadius(0.5);
 		universe.place(enemySpawn);
 		
@@ -281,17 +284,22 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 				EnemyUnit enemyUnit = enemyUnitList.get(j);
 				if (myBase.checkCollision(enemyUnit)) {
 					
-					System.out.println(myBase.myBaseHP);
+					System.out.println("自分の基地" + myBase.myBaseHP);
 					System.out.println(enemyUnit.HP);
 					myBase.myBaseHP=(myBase.myBaseHP-enemySpawn.enemyAttack);
-					enemyUnit.HP=enemyUnit.HP-10;//敵もダメージ受ける
+					enemyUnit.HP=enemyUnit.HP-1000;//敵もダメージ受ける
 					System.out.println("敵( " + j + " )から攻撃を受けた！");
 					enemySpawn.bulletX =0 ;
 					
 				}
+				if (player.checkCollision(enemyUnit)) {
+					enemyUnit.HP=0;
+				}
 				if (myBase.checkCollision(enemyUnit)) {
 					// 敵の弾を消す
 					System.out.println("プレイヤー" + /*i + */"が敵の弾" + j + "と衝突した！");
+				}
+				if(enemyUnit.HP <= 0) {
 					universe.displace(enemyUnit);
 					enemyUnitList.remove(j);
 				}
@@ -304,9 +312,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 			System.out.println("倒されました");
 			System.exit(0);
 		}
-			
-		
-		
+
 		
 		// 衝突判定
 		if (player.checkCollision(king)) {
@@ -340,6 +346,9 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		for (int i = 0; i < enemyUnitListFromSpawn.size(); i++) {
 			universe.place(enemyUnitListFromSpawn.get(i));
 			this.enemyUnitList.add(enemyUnitListFromSpawn.get(i));
+			if(enemyUnitList.get(i).HP < 0){
+				enemyUnitList.remove(i);
+			}
 		}
 	}
 	
@@ -366,5 +375,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		game.setFramePolicy(5, 33, false);
 		game.start();
 	}
+	
+	
 
 }
