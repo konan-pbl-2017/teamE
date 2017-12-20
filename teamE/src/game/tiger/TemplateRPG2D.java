@@ -33,7 +33,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		camera.addTarget(map);
 
 		// プレイヤーの配置
-		player = new Player("data\\RPG\\player.jpg");
+		player = new Player("data\\RPG\\player.png");
 		player.setPosition(14.0, 14.0);
 		player.setCollisionRadius(0.5);
 		universe.place(player);
