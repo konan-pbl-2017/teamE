@@ -1,7 +1,10 @@
 package game.kawasaki;
 
+import java.util.ArrayList;
+
 import framework.game2D.FlyingActor2D;
 import framework.game2D.Sprite;
+import framework.game2D.Velocity2D;
 
 public class EnemyUnit extends Sprite {
 	public EnemyUnit(String imageFile) {
@@ -9,8 +12,18 @@ public class EnemyUnit extends Sprite {
 		setCollisionRadius(0.2);
 	}
 
-	public int enemyHP = 100;
+	// ’e–‹‚ÌÅ‘å”
+
+	public int HP = 10000;
 	public int enemyAttack = 10;
+	
+	public double bulletX, bulletY;
+	// ’e–‹‚ÌÅ‘å”
+	private final int MAX_DANMAKU = 1;
+	// ’e‚Ì”­Ë‚Ì“G‚©‚ç‚ÌˆÊ’u
+	private final int BULLET_DISTANCE = 1;
+		
+	
 
 	// ////////////////////////////////////////////////////
 	//
@@ -37,4 +50,7 @@ public class EnemyUnit extends Sprite {
 		}
 		return false;
 	}
+	
+	
+
 }

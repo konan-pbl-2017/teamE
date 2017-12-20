@@ -10,6 +10,7 @@ public class EnemySpawn extends Sprite {
 	// Õ“Ë”»’è—p‚ÌBoundingSphere‚Ì”¼Œa
 	public double collisionRadius = 1.0;
 
+	public double bulletX, bulletY;
 	public int enemyHP = 100;
 	public int enemyAttack = 10;
 
@@ -64,13 +65,14 @@ public class EnemySpawn extends Sprite {
 	 * @return -- ’e–‹‚ª“ü‚Á‚½ArrayList
 	 */
 	public ArrayList<EnemyUnit> goEnemyUnits() {
-		double bulletX, bulletY;
+		//double bulletX, bulletY;
 		
 		ArrayList<EnemyUnit> enemyBulletList = new ArrayList<EnemyUnit>();
 		for (int i = 0; i < MAX_DANMAKU; i++) {
 			EnemyUnit enemyBullet = new EnemyUnit("data\\images\\Enemy.gif");
 
 			//‚Ü‚Á‚·‚®i‚Ş“G
+			
 			bulletX = BULLET_DISTANCE * 0.8;
 			bulletY = 0;
 			
@@ -88,9 +90,6 @@ public class EnemySpawn extends Sprite {
 
 		return enemyBulletList;
 	}
-	
-	//“G‚ª•Ç‚Ì‘O‚Å’â~‚·‚éê‡
-	
 	
 	
 	
