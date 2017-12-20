@@ -14,7 +14,7 @@ public class EnemyUnit extends Sprite {
 
 	// ’e–‹‚ÌÅ‘å”
 
-	public int HP = 10000;
+	public int HP = 1000;
 	public int enemyAttack = 10;
 	
 	public double bulletX, bulletY;
