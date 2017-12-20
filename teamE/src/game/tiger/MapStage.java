@@ -20,7 +20,7 @@ public class MapStage extends Map2D {
 				"data\\RPG\\block.jpg",
 				"data\\RPG\\sea1.jpg",
 				"data\\RPG\\road1.jpg",
-				"data\\towerdefence\\red-background.jpg"},
+				"data\\RPG\\red-background.jpg"},
 		3);
 	}
 
@@ -45,13 +45,13 @@ public class MapStage extends Map2D {
 				{ 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,3,3},
 				{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,3,3}
 		};
-
-
+		
+		
 		return map;
 	}
 
-
-
+	
+	
 	public boolean checkGridPoint(Player mazeSpritePlayer) {
 		// ŠÛ‚ßŒë·ˆ——p•Ï”‚Ì¶¬
 		double mazeSpritePositionX = new BigDecimal(mazeSpritePlayer
@@ -73,5 +73,5 @@ public class MapStage extends Map2D {
 		}
 		return false;
 	}
-
+	
 }
