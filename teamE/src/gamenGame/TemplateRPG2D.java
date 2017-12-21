@@ -87,7 +87,6 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		player2.setCollisionRadius(0.5);
 		universe.place(player2);
 		
-		
 		//by.kawasaki 自分の守る基地
 		// 自分の基地の配置
 		myBase = new MyBase("data\\towerdefence\\yousai.jpg");
