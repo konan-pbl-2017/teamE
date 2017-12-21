@@ -34,6 +34,8 @@ public class MainFrame extends JFrame{
     MapPanel map2 = new MapPanel(this,PanelNames[3]);
     ResultPanel result = new ResultPanel(this,PanelNames[4]);
     Rule rule = new Rule(this,PanelNames[5]);
+    
+    int gamestate = 0;
 
      
     public MainFrame(){
@@ -58,17 +60,12 @@ public class MainFrame extends JFrame{
         System.out.println("現在のパネル:" + jp.getName());
         String name = jp.getName();
         
+        //現在のパネルを消す処理
         if(name==PanelNames[0]){
             start = (StartPanel)jp;
             start.setVisible(false);
         }else if(name==PanelNames[1]){
             stsel = (StageSelect)jp;
-
-            //ゲーム本編を再生する
-            SimpleRolePlayingGame game = new TemplateRPG2D();
-            game.setFramePolicy(5, 33, false);
-            game.start();
-    		
             stsel.setVisible(false);
         }else if(name==PanelNames[2]){
             map1 = (MapPanel)jp;
@@ -85,12 +82,23 @@ public class MainFrame extends JFrame{
         }
         
         
+        //次に遷移したいパネルを表示する処理
         if(str==PanelNames[0]){
             start.setVisible(true);
         }else if(str==PanelNames[1]){
             stsel.setVisible(true);
         }else if(str==PanelNames[2]){
-            map1.setVisible(true);
+            //ゲーム本編を再生する
+            TemplateRPG2D game = new TemplateRPG2D();// クラスの型をSimpleRolePlayingGameから変更しています by.kawasaki 12/22
+            game.setFramePolicy(5, 33, false);
+            game.start();
+            if (game.count >= 10) {
+            	game.stop();
+            	result.setVisible(true);
+            	System.out.println("ゲームを終了します");
+            }
+            
+            //map1.setVisible(true);
         }else if(str==PanelNames[3]){
             map2.setVisible(true);
         }else if(str==PanelNames[4]){
