@@ -7,9 +7,35 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
+import java.awt.Color;
+import java.util.Random;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+import framework.RWT.RWTContainer;
+import framework.RWT.RWTFrame3D;
+import framework.RWT.RWTVirtualController;
+import framework.game2D.Sprite;
+import framework.gameMain.BaseScenarioGameContainer;
+import framework.gameMain.SimpleRolePlayingGame;
+import framework.model3D.Universe;
+import framework.scenario.Event;
+import framework.scenario.ScenarioState;
+import template.shooting2D.EnemyBullet;
+import template.shooting2D.MyShipBullet;
+import framework.game2D.Sprite;
+import framework.game2D.Velocity2D;
+import template.shooting2D.TemplateShooting2D;
+
 //ゲーム本編の画面
 public class MapPanel extends JPanel {
     
+	
     MainFrame mf;
     String str;
     
@@ -26,12 +52,14 @@ public class MapPanel extends JPanel {
         
         JButton btn1 = new JButton("ゲームクリア");
         btn1.setBounds(150, 400, 300, 80);
+        
         btn1.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
+        	public void actionPerformed(ActionEvent e){
                 pc(mf.PanelNames[4]);//クリアしたら、これを呼び出す
             }
         });
         this.add(btn1);
+      
         
         JButton btn2 = new JButton("ゲームオーバー");
         btn2.setBounds(750, 400, 300, 80);

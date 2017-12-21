@@ -7,6 +7,9 @@ import java.util.Random;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 
 import framework.RWT.RWTContainer;
 import framework.RWT.RWTFrame3D;
@@ -26,11 +29,17 @@ import template.shooting2D.TemplateShooting2D;
 public class TemplateRPG2D extends SimpleRolePlayingGame {
 	private MapStage map;
 	private Player player;
-	//private Player player2;
+	private Player player2;
 	private Player castle[] = new Player[35];//addTigar
 	private Sprite king;
 	private Sprite enemy;
 	public int i=0;//addTigar
+	public int count; //by.kawasaki 敵を倒した数をカウント
+	
+	/*
+	MainFrame mf;//画面遷移用by.kawasaki 12/22
+	String str;
+	*/
 	
 	int unitval = 0; //	置けるユニットの選択:by.tiger	##未実装##
 
@@ -57,13 +66,13 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	
 	// 速度によって物体が動いている時にボタンを押せるかどうかを判定するフラグ
 	private boolean disableControl = false;
-
+	
 	@Override
 	public void init(Universe universe) {
 		map = new MapStage();
 		universe.place(map);
 		camera.addTarget(map);
-
+		
 		// プレイヤーの配置
 		player = new Player("data\\RPG\\player.png");
 		player.setPosition(14.0, 14.0);
@@ -72,12 +81,12 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		
 		//by.kawasaki これは画面の中央にさせるための一時的なインスタンス 　
 		//プレイヤー2の配置
-		/*
+		
 		player2 = new Player("data\\RPG\\block.jpg");
 		player2.setPosition(14.0, 14.0);
 		player2.setCollisionRadius(0.5);
 		universe.place(player2);
-		*/
+		
 		
 		//by.kawasaki 自分の守る基地
 		// 自分の基地の配置
@@ -109,7 +118,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		setViewRange(30, 30);
 		
 		// プレイヤーを画面の中央に
-		//setCenter(player2);
+		setCenter(player2);
 		
 		
 		// シナリオの設定
@@ -154,7 +163,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	public void progress(RWTVirtualController virtualController, long interval) {
 		// 迷路ゲームステージを構成するオブジェクトの位置とプレイヤーの位置をもとに速度を0にするかどうかを調べる。
 		boolean resetVelocity = map.checkGridPoint(player);
-
+		
 		// 誤差による位置修正を行うため、プレイヤーのx成分とy成分が0.0の時、位置の値を切り上げる
 		if (player.getVelocity().getX() == 0.0
 				&& player.getVelocity().getY() == 0.0) {
@@ -165,7 +174,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 			.setScale(0, BigDecimal.ROUND_HALF_UP)
 			.doubleValue());
 		}
-
+		
 		// 速度が0.0にするフラグが立っていれば、速度を0にする
 		if (resetVelocity) {
 			player.setVelocity(0.0, 0.0);
@@ -367,16 +376,27 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 				}
 				if (player.checkCollision(enemyUnit)) {
 					// カーソルの近くに敵がいると、その敵のHPを０にする（##テスト機能##） 12/18 by.kawasaki
-					enemyUnit.HP=0;
+					enemyUnit.HP-=100;
 				}
 				if (myBase.checkCollision(enemyUnit)) {
 					// 基地の前に敵が来ると、攻撃してから消える処理 by.kawasaki
 					System.out.println("プレイヤー" + /*i + */"が敵の弾" + j + "と衝突した！");
 				}
+				
+				//by.kawasaki 12/22 タワーの近くで敵ユニットのHPを減らす処理 
+				/*
+				if (castle[j].checkCollision(enemyUnit)) {
+					enemyUnit.HP-=20;
+				}
+				*/
+				
 				if(enemyUnit.HP <= 0) {
 					// 敵のHPが０以下になれば、画面から消す処理 by. kawasaki
 					universe.displace(enemyUnit);
 					enemyUnitList.remove(j);
+					count++;
+					System.out.println(count);
+					//retCount();
 				}
 			}
 		//}
@@ -387,7 +407,12 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 			System.out.println("倒されました");
 			System.exit(0);
 		}
-
+		//敵を１０個以上倒したらゲーム終了
+		
+		if (count > 30) {
+			System.exit(0);
+		}
+		
 		
 		// 王様の衝突判定 ← これいる？
 		if (player.checkCollision(king)) {
@@ -440,18 +465,28 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		}
 	}
 	
+	/*
+	public int retCount() {
+		if(count > 10) {
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+	*/
 
 	/**
 	 * ゲームのメイン
 	 * 
 	 * @param args
 	 */
+	/*
 	public static void main(String[] args) {
 		SimpleRolePlayingGame game = new TemplateRPG2D();
 		game.setFramePolicy(5, 33, false);
 		game.start();
 	}
-	
+	*/
 	
 
 }
