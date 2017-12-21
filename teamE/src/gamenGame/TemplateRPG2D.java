@@ -1,6 +1,6 @@
 // auther kawasaki
 // 川崎の書いたプログラムに、Tigarのプログラムを追加し、敵とタワーの同時描写をテスト　12/21 11:23　→　成功
-package KandT;
+package gamenGame;
 
 import java.awt.Color;
 import java.util.Random;
@@ -450,7 +450,6 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		SimpleRolePlayingGame game = new TemplateRPG2D();
 		game.setFramePolicy(5, 33, false);
 		game.start();
-		
 	}
 	
 	
