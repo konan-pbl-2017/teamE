@@ -14,14 +14,14 @@ public class MapStage extends Map2D {
 		super(new String[]{
 				
 				
-				"data\\RPG\\grass1.jpg",
-				"data\\RPG\\grass2.jpg",
-				"data\\RPG\\road1.jpg",
-				"data\\RPG\\tree.jpg",		// Ç±Ç±Ç©ÇÁâ∫ÇÕè·äQï®
-				"data\\RPG\\block.jpg",
-				"data\\RPG\\sea1.jpg",
-				"data\\RPG\\road1.jpg",
-				"data\\RPG\\beach.jpg"},				
+				"data\\towerdefence\\black.jpg",
+				"data\\towerdefence\\haguruma.jpeg",
+				"data\\towerdefence\\black3.jpg",
+				"data\\towerdefence\\blue.jpg",		// Ç±Ç±Ç©ÇÁâ∫ÇÕè·äQï®
+				"data\\towerdefence\\block.jpg",
+				"data\\towerdefence\\sea1.jpg",
+				"data\\towerdefence\\black3.jpg",
+				"data\\towerdefence\\haguruma.jpeg"},				
 				
 				/*
 				"data\\RPG\\grass1.jpg",

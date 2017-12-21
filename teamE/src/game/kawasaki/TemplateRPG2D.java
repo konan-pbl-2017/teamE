@@ -67,13 +67,13 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		
 		
 		// ©•ª‚ÌŠî’n‚Ì”z’u
-		myBase = new MyBase("data\\images\\kiti.gif");
+		myBase = new MyBase("data\\towerdefence\\yousai.jpg");
 		myBase.setPosition(28.0, 14.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
 		
 		//“G‚Ì”­¶êŠ
-		enemySpawn = new EnemySpawn("data\\images\\doukutu.jpg");
+		enemySpawn = new EnemySpawn("data\\towerdefence\\spawn.jpg");
 		enemySpawn.setPosition(0.0, 14.0);
 		enemySpawn.setCollisionRadius(0.5);
 		universe.place(enemySpawn);
