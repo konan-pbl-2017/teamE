@@ -1,8 +1,29 @@
-package TestGame;
+package gamenGame;
 
 //　画面遷移を実装するためのプログラム
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import java.awt.Color;
+import java.util.Random;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+
+
+import framework.RWT.RWTContainer;
+import framework.RWT.RWTFrame3D;
+import framework.RWT.RWTVirtualController;
+import framework.game2D.Sprite;
+import framework.gameMain.BaseScenarioGameContainer;
+import framework.gameMain.SimpleRolePlayingGame;
+import framework.model3D.Universe;
+import framework.scenario.Event;
+import framework.scenario.ScenarioState;
+import template.shooting2D.EnemyBullet;
+import template.shooting2D.MyShipBullet;
+import framework.game2D.Sprite;
+import framework.game2D.Velocity2D;
+import template.shooting2D.TemplateShooting2D;
  
 public class MainFrame extends JFrame{
     
@@ -42,12 +63,16 @@ public class MainFrame extends JFrame{
             start.setVisible(false);
         }else if(name==PanelNames[1]){
             stsel = (StageSelect)jp;
+
+            //ゲーム本編を再生する
+            SimpleRolePlayingGame game = new TemplateRPG2D();
+            game.setFramePolicy(5, 33, false);
+            game.start();
+    		
             stsel.setVisible(false);
         }else if(name==PanelNames[2]){
             map1 = (MapPanel)jp;
             map1.setVisible(false);
-            //
-            
         }else if(name==PanelNames[3]){
             map2 = (MapPanel)jp;
             map2.setVisible(false);
