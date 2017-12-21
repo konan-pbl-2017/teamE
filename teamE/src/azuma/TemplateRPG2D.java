@@ -22,7 +22,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	private MapStage map;
 	private Player player;
 	private Unit unit[] =new Unit[35];
-	private UnitBullet unitbullet[] = new UnitBullet[35];
+	private UnitBullet unitbullet[][] = new UnitBullet[35][20];
 	private Sprite king;
 	private Sprite enemy;
 	int unitnum=0;
@@ -164,29 +164,31 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		//}
 			
 		//弾の発射
-		
-		for(int i=0; i<unitnum; i++){
-		
-//				if (System.currentTimeMillis() - BulletTime > 1000) {
-				if(unit[i].unitHP>0 && unitbullet[i] == null){
-					unitbullet[i] = new UnitBullet("data\\images\\myBullet.gif");
-					unitbullet[i].setPosition(unit[i].getPosition());
-					unitbullet[i].setVelocity(new Velocity2D(0.0, -10.0));
-					universe.place(unitbullet[i]);
-					unit[i].addunitHP(-1);
-					
+	
+			for(int i=0; i<unitnum; i++){//ユニットの数だけ球を生成by東
+				for(int j=0; j<20; j++){//球の数は20（HPが20なので）by東
+					if(unit[i].unitHP>0 && unitbullet[i][j]==null){//ユニットのHPが切れてないと球を打つ
+						if (System.currentTimeMillis() - BulletTime > 1000) {//一秒ごとに球を打つ
+							unitbullet[i][j] = new UnitBullet("data\\images\\myBullet.gif");
+							unitbullet[i][j].setPosition(unit[i].getPosition());
+							unitbullet[i][j].setVelocity(new Velocity2D(0.0, -10.0));
+							unit[i].addunitHP(-5);
+							universe.place(unitbullet[i][j]);
+							BulletTime = System.currentTimeMillis();
+							}
+						}	
+					if (unitbullet[i][j] != null) unitbullet[i][j].motion(interval);
 				}
-//				}
-			if (unitbullet[i] != null) unitbullet[i].motion(interval);
-			
-			if(unit[i].unitBreak()){
-				System.out.println("ユニット球切れしました");
-				universe.displace(unit[i]);
+				if(unit[i].unitBreak()){
+					System.out.println("ユニット球切れしました");
+					universe.displace(unit[i]);
+				}
 			}
+
 		
-		}
 
-
+		
+		
 		player.motion(interval, map);
 		// 衝突判定:城の撃つ弾と敵の当たり判定に使う
 		if (player.checkCollision(king)) {
