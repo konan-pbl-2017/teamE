@@ -87,16 +87,15 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		player2.setCollisionRadius(0.5);
 		universe.place(player2);
 		
-		
 		//by.kawasaki 自分の守る基地
 		// 自分の基地の配置
-		myBase = new MyBase("data\\images\\MyShip.gif");
+		myBase = new MyBase("data\\towerdefence\\yousai.jpg");
 		myBase.setPosition(32.0, 14.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
 		
 		//by. kawasaki 敵の発生場所
-		enemySpawn = new EnemySpawn("data\\images\\Enemy.gif");
+		enemySpawn = new EnemySpawn("data\\towerdefence\\spawn.jpg");
 		enemySpawn.setPosition(0.0, 14.0);
 		enemySpawn.setCollisionRadius(0.5);
 		universe.place(enemySpawn);

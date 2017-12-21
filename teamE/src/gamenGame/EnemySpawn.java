@@ -69,7 +69,7 @@ public class EnemySpawn extends Sprite {
 		
 		ArrayList<EnemyUnit> enemyBulletList = new ArrayList<EnemyUnit>();
 		for (int i = 0; i < MAX_DANMAKU; i++) {
-			EnemyUnit enemyBullet = new EnemyUnit("data\\images\\Enemy.gif");
+			EnemyUnit enemyBullet = new EnemyUnit("data\\towerdefence\\kecking.png");
 
 			//‚Ü‚Á‚·‚®i‚Þ“G
 			
