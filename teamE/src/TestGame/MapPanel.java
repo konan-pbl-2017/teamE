@@ -19,11 +19,11 @@ public class MapPanel extends JPanel {
         this.setName(s);
         this.setLayout(null);
         this.setSize(1200, 600);
-        JLabel paneltitle = new JLabel("これは"
+        /*JLabel paneltitle = new JLabel("これは"
                 +getClass().getCanonicalName()+"クラスのパネルです");
         paneltitle.setBounds(0, 5, 400, 40);
         this.add(paneltitle);
-        
+        */
         JButton btn1 = new JButton("ゲームクリア");
         btn1.setBounds(150, 400, 300, 80);
         btn1.addActionListener(new ActionListener(){

@@ -21,12 +21,11 @@ public class ResultPanel extends JPanel{
         this.setName("result");
         this.setLayout(null);
         this.setSize(1200, 600);
-        paneltitle = new JLabel("これは"
+        /*paneltitle = new JLabel("これは"
                 +getClass().getCanonicalName()+"クラスのパネルです");
         paneltitle.setBounds(0, 5, 400, 40);
         this.add(paneltitle);
-        
-        
+        */
         
         btn1 = new JButton("ステージ選択に戻る");
         btn1.setBounds(750, 400, 300, 80);

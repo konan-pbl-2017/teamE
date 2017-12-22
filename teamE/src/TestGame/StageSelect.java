@@ -1,6 +1,7 @@
 package TestGame;
 
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
  
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 public class StageSelect extends JPanel {
 	
     JButton btn1,btn2,btn3;
-    JLabel paneltitle;
+    JLabel paneltitle,introduction;
     MainFrame mf;
     String str;
     
@@ -23,13 +24,19 @@ public class StageSelect extends JPanel {
         this.setName("stsel");
         this.setLayout(null);
         this.setSize(1200, 600);
-        paneltitle = new JLabel("これは"
+        /*paneltitle = new JLabel("これは"
                 +getClass().getCanonicalName()+"クラスのパネルです");
         paneltitle.setBounds(0, 5, 400, 40);
         this.add(paneltitle);
+        */
         
+        introduction = new JLabel("<html>STAGE SELECT<html>");
+        introduction.setBounds(415, 20, 1100, 200);
+    	introduction.setFont(new Font("Arial", Font.PLAIN, 50));
+    	this.add(introduction);
+    	
         btn1 = new JButton("ステージ1に移動");
-        btn1.setBounds(150, 220, 300, 80);
+        btn1.setBounds(150, 275, 300, 80);
         btn1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 pc(mf.PanelNames[2]);
@@ -38,7 +45,7 @@ public class StageSelect extends JPanel {
         this.add(btn1);
         
         btn2 = new JButton("ステージ2に移動");
-        btn2.setBounds(750, 220, 300, 80);
+        btn2.setBounds(750, 275, 300, 80);
         btn2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 pc(mf.PanelNames[3]);
