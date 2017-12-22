@@ -1,6 +1,6 @@
 // auther kawasaki
 // 川崎の書いたプログラムに、Tigarのプログラムを追加し、敵とタワーの同時描写をテスト　12/21 11:23　→　成功
-package gamenGame;
+package TowerDefenceGame;
 
 import java.awt.Color;
 import java.util.Random;
