@@ -9,13 +9,13 @@ import framework.game2D.Velocity2D;
 public class EnemyUnit extends Sprite {
 	public EnemyUnit(String imageFile) {
 		super(imageFile, 1.0f);
-		setCollisionRadius(0.2);
+		setCollisionRadius(4.0);
 	}
 
 	// ’e–‹‚ÌÅ‘å”
 
-	public int HP = 1000;
-	public int enemyAttack = 10;
+	public int HP = 500;
+	public int enemyAttack = 100;
 	
 	public double bulletX, bulletY;
 	// ’e–‹‚ÌÅ‘å”

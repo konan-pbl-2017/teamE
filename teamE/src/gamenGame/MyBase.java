@@ -10,7 +10,7 @@ import framework.game2D.Velocity2D;
 
 public class MyBase extends Sprite {
 	//©•ª‚ÌHP
-	int myBaseHP = 10000;
+	int myBaseHP = 1000;
 	public int myBaseMoney = 5000;
 	
 	// ’e‚ÌÀ•W

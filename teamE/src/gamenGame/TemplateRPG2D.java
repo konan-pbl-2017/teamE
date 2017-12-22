@@ -74,22 +74,23 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		camera.addTarget(map);
 		
 		// プレイヤーの配置
-		player = new Player("data\\RPG\\player.png");
+		player = new Player("data\\Player\\player.gif");
 		player.setPosition(14.0, 14.0);
 		player.setCollisionRadius(0.5);
 		universe.place(player);
 		
 		//by.kawasaki これは画面の中央にさせるための一時的なインスタンス 　
 		//プレイヤー2の配置
-		
+		/*
 		player2 = new Player("data\\RPG\\block.jpg");
 		player2.setPosition(14.0, 14.0);
 		player2.setCollisionRadius(0.5);
 		universe.place(player2);
+		*/
 		
 		//by.kawasaki 自分の守る基地
 		// 自分の基地の配置
-		myBase = new MyBase("data\\towerdefence\\yousai.jpg");
+		myBase = new MyBase("data\\towerdefence\\icommons.png");
 		myBase.setPosition(32.0, 14.0);
 		myBase.setCollisionRadius(0.5);
 		universe.place(myBase);
@@ -114,10 +115,10 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		
 		// mapを画面の中央に 　←　なぜか僕（川崎）の家だと失敗する笑　頭にきますよ！ｗ
 		setMapCenter(14.0, 14.0);
-		setViewRange(30, 30);
+		setViewRange(34, 30);
 		
 		// プレイヤーを画面の中央に
-		setCenter(player2);
+		//setCenter(player2);
 		
 		
 		// シナリオの設定
@@ -245,12 +246,13 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		if (unitval==3)player.setImage("data\\player\\playerR.gif");
 		if (unitval==4)player.setImage("data\\player\\playerL.gif");
 
-
-		if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B) && castleable == true) {
-			if (i<= 30){
+		//by.kisimoto 道の上には置けないように変更
+		if ((virtualController.isKeyDown(0, RWTVirtualController.BUTTON_B) && castleable == true && unitval != 0)
+				&& (player.getPosition().getY() <= 12||player.getPosition().getY()>=16)) {
+			if (i<= 10){
 			castle[i] = new Player("data\\RPG\\block.jpg");
 			castle[i].setPosition(player.getPosition());
-			castle[i].setCollisionRadius(0.5);
+			castle[i].setCollisionRadius(4.0);
 			universe.place(castle[i]);
 			}//30個までは普通に生成:by.tiger
 			i++;
@@ -305,7 +307,6 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 			EnemyUnit enemyUnit = enemyUnitList.get(i);
 			enemyUnit.motion(interval);		// 敵の弾の移動
 			if (enemyUnit.isInScreen((int)viewRangeWidth, (int)viewRangeHeight) == false) {
-				// 敵の弾を消す
 				universe.displace(enemyUnit);
 				enemyUnitList.remove(i);
 			}
@@ -363,31 +364,30 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 			//MyShipBullet myShipBullet = myShipBulletList.get(i);
 			for (int j = 0; j < enemyUnitList.size(); j++) {
 				EnemyUnit enemyUnit = enemyUnitList.get(j);
+				
 				if (myBase.checkCollision(enemyUnit)) {
 					// 基地の前に敵が来ると、攻撃してから消える処理 by.kawasaki
-					System.out.println("自分の基地" + myBase.myBaseHP);
-					System.out.println(enemyUnit.HP);
-					myBase.myBaseHP=(myBase.myBaseHP-enemySpawn.enemyAttack);
-					enemyUnit.HP=enemyUnit.HP-1000;//敵もダメージ受ける
+					System.out.println("自分の基地のHP = " + myBase.myBaseHP);
+					System.out.println("敵のHP = "+enemyUnit.HP);
+					myBase.myBaseHP -= enemySpawn.enemyAttack;
+					enemyUnit.HP -= 500;//敵もダメージ受ける
 					System.out.println("敵( " + j + " )から攻撃を受けた！");
-					enemySpawn.bulletX =0 ;
 					
 				}
-				if (player.checkCollision(enemyUnit)) {
-					// カーソルの近くに敵がいると、その敵のHPを０にする（##テスト機能##） 12/18 by.kawasaki
-					enemyUnit.HP-=100;
+				for (i=0;i<10;i++) {
+					if (castle[i] != null && castle[i].checkCollision(enemyUnit)) {
+						// タワーの近くに敵がいると、その敵のHPを０にする（##テスト機能##） 12/18 by.kawasaki
+						enemyUnit.HP-=500;
+					}
 				}
+				/*
 				if (myBase.checkCollision(enemyUnit)) {
 					// 基地の前に敵が来ると、攻撃してから消える処理 by.kawasaki
-					System.out.println("プレイヤー" + /*i + */"が敵の弾" + j + "と衝突した！");
-				}
-				
-				//by.kawasaki 12/22 タワーの近くで敵ユニットのHPを減らす処理 
-				/*
-				if (castle[j].checkCollision(enemyUnit)) {
-					enemyUnit.HP-=20;
+					myBase.myBaseHP -= 100;
 				}
 				*/
+				
+				//by.kawasaki 12/22 タワーの近くで敵ユニットのHPを減らす処理 
 				
 				if(enemyUnit.HP <= 0) {
 					// 敵のHPが０以下になれば、画面から消す処理 by. kawasaki
@@ -408,7 +408,7 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 		}
 		//敵を１０個以上倒したらゲーム終了
 		
-		if (count > 30) {
+		if (count >= 30) {
 			System.exit(0);
 		}
 		
@@ -479,13 +479,13 @@ public class TemplateRPG2D extends SimpleRolePlayingGame {
 	 * 
 	 * @param args
 	 */
-	/*
+	
 	public static void main(String[] args) {
 		SimpleRolePlayingGame game = new TemplateRPG2D();
 		game.setFramePolicy(5, 33, false);
 		game.start();
 	}
-	*/
+	
 	
 
 }

@@ -13,24 +13,30 @@ public class MapStage extends Map2D {
 	public MapStage() {
 		super(new String[]{
 				
-				
+				// ‚‰æ¿
 				"data\\towerdefence\\black.jpg",
 				"data\\towerdefence\\haguruma.jpeg",
 				"data\\towerdefence\\black3.jpg",
 				"data\\towerdefence\\blue.jpg",		// ‚±‚±‚©‚ç‰º‚ÍáŠQ•¨
-				"data\\towerdefence\\block.jpg",
+				"data\\towerdefence\\black3.jpg",
 				"data\\towerdefence\\sea1.jpg",
 				"data\\towerdefence\\black3.jpg",
-				"data\\towerdefence\\haguruma.jpeg"},				
+				"data\\towerdefence\\haguruma.jpeg"},	
 				
+				
+				//’á‰æ¿
 				/*
 				"data\\RPG\\grass1.jpg",
 				"data\\RPG\\grass2.jpg",
 				"data\\RPG\\road1.jpg",
 				"data\\RPG\\tree.jpg",		// ‚±‚±‚©‚ç‰º‚ÍáŠQ•¨
 				"data\\RPG\\block.jpg",
-				"data\\RPG\\sea1.jpg",},
+				"data\\RPG\\block.jpg",
+				"data\\RPG\\road1.jpg",
+				"data\\RPG\\road1.jpg"},
 				*/
+				
+				
 		3);
 		
 	}
